@@ -19,6 +19,7 @@ struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *he
     struct ListNode* n2 = headB;
     while(n1 != n2)
     {
+        //找不到相交点时且n1 n2 不同时为空时，就重新从headA和headB的头遍历，找到为止
         n1 = n1 == NULL ? headA : n1->next;
         n2 = n2 == NULL ? headB : n2->next;
     }
