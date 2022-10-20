@@ -27,10 +27,13 @@ struct ListNode
 
 struct ListNode* removeElements(struct ListNode* head, int val){
     struct ListNode* dummyHead = malloc(sizeof(struct ListNode));
+    //让dummyHead的next指向head;== 头插，让哑节点和head产生联系
     dummyHead->next = head;
+    //让temp指针去遍历dummyHead链表
     struct ListNode* temp = dummyHead;
     while (temp->next != NULL) {
         if (temp->next->val == val) {
+            //要从temp的next开始，而不是temp，因为最后要返回的是dummyHead->next;
             temp->next = temp->next->next;
         } else {
             temp = temp->next;
