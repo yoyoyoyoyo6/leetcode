@@ -6,6 +6,10 @@ int ansSize;
 
 //相比组合，多出来了存放和的sum
 void backtrcking(int n, int k, int sum, int strantIndex){
+    //剪枝，如果当前的和比n要大，则直接不用继续进行
+    if(sum > n){
+        return;
+    }
     if(pathSize == k){
         //满足了pathSize == k，但不满足n == sum，如果return在n == sum中，则无法终止，导致报错
         if(n == sum){
