@@ -1,7 +1,7 @@
 class Solution {
 public:
     int numTrees(int n){
-        //dp[i] ： 1到i为节点组成的⼆叉搜索树的个数为dp[i]
+        //dp[i] ： 1到i为节点组成的⼆叉搜索树的个数为dp[i]  or  i的不同元素节点组成的⼆叉搜索树的个数为dp[i]
         vector<int> dp(20);
         //初始化状态dp[0] = dp[1] = 0  0和1都为一个节点，所以都为1
         dp[0] = 1;
