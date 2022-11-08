@@ -1,4 +1,5 @@
 #include<iostream>
+#include<vector>
 using namespace std;
 
 void test_2_wei_bag_problem1(){
@@ -9,12 +10,23 @@ void test_2_wei_bag_problem1(){
 
     //dp数组:dp[i][j]表示从下标为[0-i]的物品中选取一个，放入容量为j的背包中，价值总和最大为多少
     //所以i的大小为weight.size() + 1,要从0开始遍历。j的大小就为bagwegiht + 1。并且二维数组中的每个元素都初始化为0
-    vector<vector<int>> dp(weight.size() + 1, vector<int>(bagweight + 1, 0));
+    vector<vector<int>> dp(weight.size() + 1, vector<int>(bagwegiht + 1, 0));
     
     //初始化状态
     //dp[i][0] 因为容量为0，所以价值也为0,创建二维数组时已经将数组中的元素都初始化为0，所以不用操作
     //dp[0][j] 是标号为0的物品的价值，所以都赋值为value[0],并且每次遍历j都要剪去weight[0]的重量
-    for(int j = bagwegiht; j >= weight[0]; j--){
+    //为何j要逆序遍历？如果正序遍历，会导致物品0被重复放入
+    //正序遍历
+    /*for(int j = weight[0]; j<=bagweight; j++){
+        dp[0][j] = dp[0][j-weight[0]] + value[0];
+    }*/
+    //dp[0][1] = 15  dp[0][2] = dp[0][2-1] + 15; 物品0重复放入
+    
+    // 倒叙就是先算dp[2]
+    // dp[2] = dp[2 - weight[0]] + value[0] = 15 （dp数组已经都初始化为0）
+    // dp[1] = dp[1 - weight[0]] + value[0] = 15
+    // 所以从后往前循环，每次取得状态不会和之前取得状态重合，这样每种物品就只取⼀次了。
+    for(int j=bagwegiht; j>=weight[0]; j--){
         dp[0][j] = dp[0][j - weight[0]] + value[0];
     }
 
@@ -35,7 +47,7 @@ void test_2_wei_bag_problem1(){
         }
     }
     //输出dp数组最后一个元素
-    cout << dp[weight.size()][bagwegiht] << endl;
+    cout << dp[weight.size() - 1][bagwegiht] << endl;
 }
   
   int main(){
