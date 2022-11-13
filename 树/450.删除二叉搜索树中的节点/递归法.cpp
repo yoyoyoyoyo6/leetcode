@@ -55,6 +55,7 @@ public:
             }
             //删除掉successor->val代表的元素，然后将root->right代替掉(用其右子树中的最小节点代替该节点的数据并递归的删除那个节点)
             root->right = deleteNode(root->right, successor->val);
+            //将successor更新为新的root节点
             successor->right = root->right;
             successor->left = root->left;
             return successor;
