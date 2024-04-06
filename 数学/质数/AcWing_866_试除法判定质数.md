@@ -38,7 +38,41 @@ int main()
 }
 ```
 # 优化
-![原理](数学/质数/试除法判断质因数优化原理.jpeg)
+![原理](https://cdn.acwing.com/media/article/image/2024/04/06/407140_ec032fccf3-407140_b023bbfaef-A84B73CA-C181-4BC0-9F09-76C42E6CA1B3.jpeg) 
+只枚举`d<=a/d`的d即可，将时间复杂度降低到`O(sqrt(n))`。
 ``` C++
+#include <iostream>
+#include <cstring>
+#include <algorithm>
 
+using namespace std;
+
+int n;
+
+bool check(int a)
+{
+    if (a < 2)
+        return false;
+    for (int i = 2; i <= a / i; i ++)
+    {
+        if (a % i == 0)
+            return false;
+    }
+    return true;
+}
+
+int main()
+{
+    cin >> n;
+    while (n -- )
+    {
+        int a;
+        cin >> a;
+        if (check(a))
+            cout << "Yes" << endl;
+        else
+            cout << "No" << endl;
+    }
+    return 0;
+}
 ```
